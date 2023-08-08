@@ -1,0 +1,36 @@
+/* pt-5 px-3 px-md-0 f-center flex-column f-center mb-4
+toggle-link-item
+toggle-link-item active-link
+form-box
+mb-3 */
+
+.f-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.toggle-link-item {
+  text-decoration: none;
+  font-weight: 700;
+  color: #575757;
+  font-size: large;
+  padding: 0 1rem;
+}
+.toggle-link-item:first-child {
+  border-right: 2px solid #575757;
+}
+
+.toggle-link-item.active-link,
+.toggle-link-item:hover {
+  color: #aa4bff;
+}
+.form-box {
+  width: 100%;
+  display: inline-block;
+  border: var(--border-thin-dark);
+  border-radius: 5px;
+  padding: 2rem;
+}
+.wt-500{
+  width: 600px !important;
+}
