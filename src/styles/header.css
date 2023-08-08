@@ -204,3 +204,14 @@
     display: block;
   }
 }
+.btn-primary{
+  color: white;
+  background: none !important;
+  border: none !important;
+  box-shadow: none;
+}
+.drp-dwn
+{
+  display: flex;
+  justify-content: end;
+}

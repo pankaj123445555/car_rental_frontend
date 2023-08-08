@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useReducer } from "react";
 import { Container, Row, Form, Col, Button, Spinner } from "react-bootstrap";
-import { Link} from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import '../../styles/add.css'
 import axiosInstance from "../../utils/axiosUtil";
 import { Store } from "../../Store";
@@ -10,7 +10,7 @@ import { editReducer } from "../../reducers/CommonReducer";
 const SignIn = () => {
   
   const{ dispatch : ctxdispatch}= useContext(Store);
- const [isFetching, setisFetching] = useState(false);
+   const navigate = useNavigate();
  const [values,setValues] = useState({
   email : "",
   password : ""
@@ -39,6 +39,7 @@ const SignIn = () => {
         localStorage.setItem("userInfo", JSON.stringify(data.user));
         localStorage.setItem("token", JSON.stringify(data.token));
         dispatch({ type: "FETCH_SUCCESS" });
+        navigate('/home')
       }
       else
       {

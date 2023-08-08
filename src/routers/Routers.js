@@ -10,14 +10,17 @@ import NotFound from "../pages/NotFound";
 import Contact from "../pages/Contact";
 import SignIn from "../components/signinSingup/Signin";
 import Register from "../components/signinSingup/Register";
+import Temp from "../components/Temp";
 // import SignUp from "../components/signinSingup/Register";
 
 const Routers = () => {
   return (
     <Routes>
+      <Route path="/" element={<Register/>} />
+      <Route path="/temp" element={<Temp/>} />
       <Route path="/sign-up" element={<Register/>} />
       <Route path="/sign-in" element={<SignIn/>} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/home" element={<Home/>} />
       <Route path="/about" element={<About />} />
       <Route path="/cars" element={<CarListing />} />
       <Route path="/cars/:slug" element={<CarDetails />} />
