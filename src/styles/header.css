@@ -205,10 +205,10 @@
   }
 }
 .btn-primary{
-  color: white;
-  background: none !important;
-  border: none !important;
-  box-shadow: none;
+  /* color: white; */
+  /* background: none !important; */
+  /* border: none !important; */
+  /* box-shadow: none; */
 }
 .drp-dwn
 {

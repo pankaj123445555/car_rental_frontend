@@ -14,7 +14,7 @@ const Register = () => {
   const{ dispatch : ctxdispatch}= useContext(Store);
   const navigate = useNavigate();
   useEffect(()=>{
-      console.log(localStorage.getItem("token"))
+      
     if (localStorage.getItem("token")) {
       navigate("/home");
     }
@@ -44,7 +44,7 @@ const Register = () => {
       try{
         dispatch({ type: "FETCH_REQUEST" });
         const {data} = await  axiosInstance.post('/api/user/register',values);
-        console.log(data);
+        
         if (data.token) {
           ctxdispatch({ type: "USER_SIGNIN", payload: data });
          localStorage.setItem("userInfo", JSON.stringify(data.user));

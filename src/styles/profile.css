@@ -1,0 +1,61 @@
+.form-component{
+    width: 70%;
+    border-radius: 12px;
+    border: 1px solid rgba(205, 205, 205, 0.64);
+    background: #FFF;
+    box-shadow: 0px 4px 24px 0px rgba(0, 0, 0, 0.04);
+}
+.make-div-row
+{
+    display: flex;
+}
+.make-div-column
+{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}
+.alg-itm
+{
+    align-items: center;
+}
+.just-cont-cent
+{
+    justify-content: center;
+}
+.profile-header
+{
+   border-bottom: 1px solid var(--bs-gray-400);
+    padding: 1rem;
+    color: var(--bs-heading-color);
+}
+.font-heading
+{
+    color: #000c;
+    font-family: Inter;
+    font-size: 1.9rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%;
+}
+.pds-1
+{
+    padding: 1rem;
+}
+.light-font
+{
+color: var(--text-slate-color-50, #7E8B9E);
+font-family: Inter;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+}
+.light-border-bottom
+{
+    border-bottom: 1px solid var(--bs-gray-400)
+}
+#upd-btn
+{
+    width: 30%;
+}

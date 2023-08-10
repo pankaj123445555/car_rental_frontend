@@ -11,6 +11,7 @@ import Contact from "../pages/Contact";
 import SignIn from "../components/signinSingup/Signin";
 import Register from "../components/signinSingup/Register";
 import Temp from "../components/Temp";
+import Profile from "../components/UI/Profile";
 // import SignUp from "../components/signinSingup/Register";
 
 const Routers = () => {
@@ -27,6 +28,7 @@ const Routers = () => {
       <Route path="/blogs" element={<Blog />} />
       <Route path="/blogs/:slug" element={<BlogDetails />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/profile" element = {<Profile/>}/>
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

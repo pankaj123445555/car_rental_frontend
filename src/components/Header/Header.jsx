@@ -74,7 +74,7 @@ const Header = () => {
 
                  <Dropdown>
                   <Dropdown.Toggle  id="user_profile"
-                  className="btn-primary">
+                  className="btn-primary" >
                   <FaUserCircle size={"25px"} />
                   </Dropdown.Toggle>
 
