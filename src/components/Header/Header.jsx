@@ -36,7 +36,7 @@ const navLinks = [
 const Header = () => {
   const menuRef = useRef(null);
   const {state , dispatch : ctxDispatch} = useContext(Store);
-  const {userInfo} = state;
+  const {userInfo,token} = state;
   const navigate = useNavigate();
 
   const signoutHandler = () => {
@@ -67,7 +67,7 @@ const Header = () => {
             </Col>
 
             {
-              state.token ? (
+              token ? (
 
                 <Col lg="6" md="6" sm="6">
                  <div className="drp-dwn">

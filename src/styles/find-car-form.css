@@ -80,6 +80,15 @@
   border: none;
   outline: none;
 }
+#car-form-sbt-div{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+#sbt-btn{
+  width: 30%;
+}
 
 @media only screen and (max-width: 992px) {
   .find__cars-left {
@@ -147,3 +156,5 @@
     bottom: -250px;
   }
 }
+
+
