@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect,useReducer, useState} from "react";
 
 import HeroSlider from "../components/UI/HeroSlider";
 import Helmet from "../components/Helmet/Helmet";
@@ -11,10 +11,20 @@ import carData from "../assets/data/carData";
 import CarItem from "../components/UI/CarItem";
 import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
-
 import BlogList from "../components/UI/BlogList";
+import '../styles/add.css'
+
 
 const Home = () => {
+
+   const [cars,setCars] = useState([]);
+   const [loading,setLoading] = useState(true);
+
+  useEffect(()=>{
+    console.log('home',cars);
+    console.log(loading)
+  },[cars,loading]);
+  
   return (
     <Helmet title="Home">
       {/* ============= hero section =========== */}
@@ -31,12 +41,43 @@ const Home = () => {
               </Col>
 
               <Col lg="8" md="8" sm="12">
-                <FindCarForm />
+              {/* this is car form */}
+                <FindCarForm setCars = {setCars} setLoading = {setLoading}/>
               </Col>
+               
             </Row>
+          
           </Container>
         </div>
       </section>
+      {/* available car section */}
+      <section>
+  {loading ? (
+    null
+  ) : (
+    <div className="imp-prp">
+      <Row className="row-car-list">
+      <div className="bk-car">
+      <span >BOOK YOU'R Car</span>
+      </div>
+        {cars.length === 0 ? (
+          <div className="nt-fnd">
+          <span>All car is booked , try different date</span>
+          </div>
+        ) : (
+          <>
+            <Row>
+            {carData.slice(0, 6).map((item) => (
+              <CarItem item={item} key={item.id} />
+            ))}
+            </Row>
+          </>
+        )}
+      </Row>
+    </div>
+  )}
+</section>
+
       {/* =========== about section ================ */}
       <AboutSection />
       {/* ========== services section ============ */}

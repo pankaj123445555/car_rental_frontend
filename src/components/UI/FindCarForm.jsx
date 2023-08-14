@@ -1,10 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useReducer, useEffect} from "react";
 import "../../styles/find-car-form.css";
 import "../../styles/find-car-form.css";
 import { Form, FormGroup } from "reactstrap";
 import axiosInstance from "../../utils/axiosUtil";
+import { availableCar } from "../../reducers/carReducer";
 
-const FindCarForm = () => {
+const FindCarForm = (props) => {
+  
+  const {setCars, setLoading} = props
+  
+  const [{loading,cars,error},dispatch] = useReducer(availableCar,{
+    loading : true,
+    cars : [],
+    error : ""
+  });
+   
+  
   const [values,setValues] = useState({
     "fromAddress" : "",
     "toAddress" : "",
@@ -16,8 +27,23 @@ const FindCarForm = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    const res = await axiosInstance.post('/api/car/getAvail-car',values);
-    console.log(res);
+    try{
+       dispatch({type : 'FETCH_REQUEST'})
+      const {data} = await axiosInstance.post('/api/car/getAvail-car',values);
+      setCars(data.availableCars);
+      setLoading(false);
+      dispatch({type : 'FETCH_SUCCESS',payload : data});
+
+    }
+    catch(err)
+    {
+      console.log(err);
+      dispatch({type: 'FETCH_FAIL',payload : err});
+      setLoading(loading)
+       // showing an error
+    }
+    
+    
   }
 
   const handleChange = (e) => {

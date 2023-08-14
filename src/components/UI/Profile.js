@@ -9,6 +9,13 @@ import axiosInstance from '../../utils/axiosUtil';
 import { Store } from '../../Store';
 import {editReducer} from '../../reducers/CommonReducer'
 
+import { Container } from "reactstrap";
+
+import Helmet from '../Helmet/Helmet';
+import CommonSection from './CommonSection';
+import CarItem from './CarItem';
+import carData from '../../assets/data/carData';
+
 
 function Profile() {
 
@@ -75,6 +82,7 @@ function Profile() {
     useEffect(()=>{
       
      fetchDetails();
+
     
     },[])
   return (
@@ -158,9 +166,10 @@ function Profile() {
           
           </Row>
         </Form>
+         </div>   
          </div>
-         
-         </div>
+
+        
          </div>
        </div>
       );
