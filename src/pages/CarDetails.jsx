@@ -6,11 +6,26 @@ import Helmet from "../components/Helmet/Helmet";
 import { useParams } from "react-router-dom";
 import BookingForm from "../components/UI/BookingForm";
 import PaymentMethod from "../components/UI/PaymentMethod";
+import img01 from "../assets/all-images/cars-img/nissan-offer.png"
 
 const CarDetails = () => {
-  const { slug } = useParams();
-
-  const singleCarItem = carData.find((item) => item.carName === slug);
+  const { id } = useParams();
+  console.log('pankaj',id);
+  const singleCarItem =  {
+    id: 1,
+    brand: "Tesla",
+    rating: 112,
+    carName: "Tesla Malibu",
+    imgUrl: img01,
+    model: "Model 3",
+    price: 50,
+    speed: "20kmpl",
+    gps: "GPS Navigation",
+    seatType: "Heated seats",
+    automatic: "Automatic",
+    description:
+      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);

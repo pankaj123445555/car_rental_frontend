@@ -1,6 +1,7 @@
 import React, {useState, useReducer, useEffect} from "react";
 import "../../styles/find-car-form.css";
 import "../../styles/find-car-form.css";
+import { Spinner } from "react-bootstrap";
 import { Form, FormGroup } from "reactstrap";
 import axiosInstance from "../../utils/axiosUtil";
 import { availableCar } from "../../reducers/carReducer";
@@ -10,7 +11,7 @@ const FindCarForm = (props) => {
   const {setCars, setLoading} = props
   
   const [{loading,cars,error},dispatch] = useReducer(availableCar,{
-    loading : true,
+    loading : false,
     cars : [],
     error : ""
   });
@@ -50,11 +51,11 @@ const FindCarForm = (props) => {
      setValues({...values, [e.target.name] : e.target.value})
   }
   return (
-    <Form className="form">
+    <Form className="form" onSubmit={handleSubmit}>
       <div className=" d-flex align-items-center justify-content-between flex-wrap">
         <FormGroup className="form__group">
         <label>From address</label>
-          <input onChange={handleChange}  type="text" placeholder="From address" required name="fromAddress" />
+          <input  onChange={handleChange}  type="text" placeholder="From address" required name="fromAddress" />
         </FormGroup>
 
         <FormGroup className="form__group">
@@ -104,7 +105,16 @@ const FindCarForm = (props) => {
   </FormGroup> */}
 
         <FormGroup className="form__group" id="car-form-sbt-div">
-          <button onClick={handleSubmit} className="btn find__car-btn" id="sbt-btn">Find Car</button>
+        {
+          loading? (
+            <button  className="btn find__car-btn sbt-btn" disabled>
+            <Spinner animation="border" variant="light" />
+            </button>
+          ):(
+            <button type="submit" className="btn find__car-btn sbt-btn">Find Car</button>
+          )
+        }
+          
         </FormGroup>
       </div>
     </Form>
