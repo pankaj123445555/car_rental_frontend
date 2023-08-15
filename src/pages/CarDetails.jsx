@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import carData from "../assets/data/carData";
 import { Container, Row, Col } from "reactstrap";
@@ -7,46 +7,50 @@ import { useParams } from "react-router-dom";
 import BookingForm from "../components/UI/BookingForm";
 import PaymentMethod from "../components/UI/PaymentMethod";
 import img01 from "../assets/all-images/cars-img/nissan-offer.png"
+import axiosInstance from "../utils/axiosUtil";
+import axios from "axios";
 
 const CarDetails = () => {
   const { id } = useParams();
-  console.log('pankaj',id);
-  const singleCarItem =  {
-    id: 1,
-    brand: "Tesla",
-    rating: 112,
-    carName: "Tesla Malibu",
-    imgUrl: img01,
-    model: "Model 3",
-    price: 50,
-    speed: "20kmpl",
-    gps: "GPS Navigation",
-    seatType: "Heated seats",
-    automatic: "Automatic",
-    description:
-      " Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam. Dolor labore lorem no accusam sit justo sadipscing labore invidunt voluptua, amet duo et gubergren vero gubergren dolor. At diam.",
+  
+  const [car,setCar] = useState([])
+  
+
+  const fetchCarDetails = async() => {
+
+      try{
+
+        const {data} =  await axiosInstance.get(`/api/car/find-car?id=${id}`);
+         setCar(data.car);
+      }
+      catch(err)
+      {
+         console.log(err);
+      }
+     
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [singleCarItem]);
+   window.scrollTo(0,0);
+    fetchCarDetails();
+  }, []);
 
   return (
-    <Helmet title={singleCarItem.carName}>
+    <Helmet title={car.name}>
       <section>
         <Container>
           <Row>
             <Col lg="6">
-              <img src={singleCarItem.imgUrl} alt="" className="w-100" />
+              <img src={car.image} alt="" className="w-100" />
             </Col>
 
             <Col lg="6">
               <div className="car__info">
-                <h2 className="section__title">{singleCarItem.carName}</h2>
+                <h2 className="section__title">{car.name}</h2>
 
                 <div className=" d-flex align-items-center gap-5 mb-4 mt-3">
                   <h6 className="rent__price fw-bold fs-4">
-                    ${singleCarItem.price}.00 / Day
+                    ${car.price}.00 / Day
                   </h6>
 
                   <span className=" d-flex align-items-center gap-2">
@@ -57,12 +61,12 @@ const CarDetails = () => {
                       <i class="ri-star-s-fill"></i>
                       <i class="ri-star-s-fill"></i>
                     </span>
-                    ({singleCarItem.rating} ratings)
+                    ({car.rating} ratings)
                   </span>
                 </div>
 
                 <p className="section__description">
-                  {singleCarItem.description}
+                  {car.details}
                 </p>
 
                 <div
@@ -74,7 +78,7 @@ const CarDetails = () => {
                       class="ri-roadster-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.model}
+                    {car.model}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -82,7 +86,7 @@ const CarDetails = () => {
                       class="ri-settings-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.automatic}
+                    {car.automatic}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -90,7 +94,7 @@ const CarDetails = () => {
                       class="ri-timer-flash-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.speed}
+                    {car.speed}
                   </span>
                 </div>
 
@@ -100,7 +104,7 @@ const CarDetails = () => {
                 >
                   <span className=" d-flex align-items-center gap-1 section__description">
                     <i class="ri-map-pin-line" style={{ color: "#f9a826" }}></i>{" "}
-                    {singleCarItem.gps}
+                    {car.gps}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -108,7 +112,7 @@ const CarDetails = () => {
                       class="ri-wheelchair-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.seatType}
+                    {car.seatType}
                   </span>
 
                   <span className=" d-flex align-items-center gap-1 section__description">
@@ -116,7 +120,7 @@ const CarDetails = () => {
                       class="ri-building-2-line"
                       style={{ color: "#f9a826" }}
                     ></i>{" "}
-                    {singleCarItem.brand}
+                    {car.brand}
                   </span>
                 </div>
               </div>

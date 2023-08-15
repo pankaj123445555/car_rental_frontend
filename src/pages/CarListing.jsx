@@ -4,8 +4,28 @@ import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/CommonSection";
 import CarItem from "../components/UI/CarItem";
 import carData from "../assets/data/carData";
+import axiosInstance from "../utils/axiosUtil";
+import CarItems from "../components/UI/CarItems";
 
 const CarListing = () => {
+
+  const [cars,setCars] = useState([]);
+
+  const fetchCar = async() =>{
+     
+        try{
+             const {data} = await axiosInstance.get('/api/car/get-car');
+             setCars(data.cars);
+        }
+        catch(error)
+        {
+             console.log(error);
+        }
+  }
+
+ useEffect(()=>{
+    fetchCar();
+ },[]);
 
  
   
@@ -31,8 +51,8 @@ const CarListing = () => {
               </div>
             </Col>
 
-            {carData.map((item) => (
-              <CarItem item={item} key={item.id} />
+            {cars.map((item) => (
+              <CarItems item={item} key={item.id} />
             ))}
           </Row>
         </Container>

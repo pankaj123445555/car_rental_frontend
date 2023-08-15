@@ -14,16 +14,28 @@ import BecomeDriverSection from "../components/UI/BecomeDriverSection";
 import Testimonial from "../components/UI/Testimonial";
 import BlogList from "../components/UI/BlogList";
 import '../styles/add.css'
+import axiosInstance from "../utils/axiosUtil";
 
 
 const Home = () => {
 
    const [cars,setCars] = useState([]);
+   const[allCar,setAllCar] = useState([]);
    const [loading,setLoading] = useState(true);
+   const fetchCar = async() =>{
+      
+         try{
+              const {data} = await axiosInstance.get('/api/car/get-car');
+              setAllCar(data.cars);
+         }
+         catch(error)
+         {
+              console.log(error);
+         }
+   }
 
   useEffect(()=>{
-    console.log('home',cars);
-    console.log(loading)
+     fetchCar();
   },[cars,loading]);
   
   return (
@@ -103,8 +115,8 @@ const Home = () => {
               <h2 className="section__title">Hot Offers</h2>
             </Col>
 
-            {carData.slice(0, 6).map((item) => (
-              <CarItem item={item} key={item.id} />
+            {allCar.map((item) => (
+              <CarItems item={item} key={item.id} />
             ))}
           </Row>
         </Container>
