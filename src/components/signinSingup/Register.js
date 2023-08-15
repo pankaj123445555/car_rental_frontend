@@ -3,13 +3,15 @@ import { Container, Row, Form, Col, Button, Spinner } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utils/axiosUtil";
 import { editReducer } from "../../reducers/CommonReducer";
-
-// import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
+import { getError } from "../../utils/error";
 
 import '../../styles/add.css'
 import { Store } from "../../Store";
 
 const Register = () => {
+  
 
   const{ dispatch : ctxdispatch}= useContext(Store);
   const navigate = useNavigate();
@@ -20,6 +22,14 @@ const Register = () => {
     }
 
   },[])
+
+  const toastOptions = {
+    position: "TOP_LEFT",
+    autoClose: 3000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
 
   const [{loading,error}, dispatch] = useReducer(editReducer , {
     loading : false,
@@ -41,6 +51,11 @@ const Register = () => {
 
     const handleSubmit = async(e) => {
       e.preventDefault();
+       if(values.phone.length<10)
+       {
+         toast.warning('phone number should not be less than 10')
+         return;
+       }
       try{
         dispatch({ type: "FETCH_REQUEST" });
         const {data} = await  axiosInstance.post('/api/user/register',values);
@@ -50,19 +65,17 @@ const Register = () => {
          localStorage.setItem("userInfo", JSON.stringify(data.user));
          localStorage.setItem("token", JSON.stringify(data.token));
          dispatch({ type: "FETCH_SUCCESS" });
+         navigate("/home");
        }
-       else
-       {
-         // show error 
-       }
-
+        
       }
-      catch(error)
+      catch(err)
       {
-        dispatch({
-          type: "FETCH_FAIL",
-          payload: error,
-        });
+        toast.error(err.message);
+          dispatch({
+            type: "FETCH_FAIL",
+            payload: err,
+          }); 
       }
      
      
@@ -135,6 +148,7 @@ const Register = () => {
                   </Button>
                 )}
               </Form>
+              <ToastContainer />
             </div>
           </Container>
     </>
